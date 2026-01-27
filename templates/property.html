@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ property.title }}</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: aliceblue;
+        }
+
+        .wrapper {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px;
+            background: #fff;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .price {
+            color: #e76f51;
+            font-size: 22px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <img src="{{ property.image }}">
+        <h1>{{ property.title }}</h1>
+        <p>{{ property.location }}</p>
+        <p class="price">{{ property.price }}</p>
+        <p>{{ property.description }}</p>
+    </div>
+
+</body>
+
+</html>

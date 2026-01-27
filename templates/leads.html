@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lead Form</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            width: 100%;
+            height: 100%;
+            background: skyblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            background: #fff;
+            width: 420px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            text-align: center;
+            color: steelblue;
+            margin-bottom: 20px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .options button {
+            padding: 10px;
+            border: 1px solid steelblue;
+            background: #fff;
+            color: steelblue;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .options button.active,
+        .options button:hover {
+            background-color: steelblue;
+            color: #fff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: forestgreen;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="overlay">
+        <div class="popup">
+            <h2>Get Property Details</h2>
+
+            <form method="post" action="/leads/submit">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="tel" name="mobile" placeholder="Mobile No" required>
+
+                <select name="location" required>
+                    <option value="">Select Location</option>
+                    <option>Bangalore</option>
+                    <option>Hyderabad</option>
+                    <option>Chennai</option>
+                    <option>Pune</option>
+                </select>
+
+                <!-- hidden field to store selection -->
+                <input type="hidden" name="interest_type" id="interest_type" required>
+
+                <div class="options">
+                    <button type="button" onclick="selectType(this, '2BHK')">2 BHK</button>
+                    <button type="button" onclick="selectType(this, '3BHK')">3 BHK</button>
+                    <button type="button" onclick="selectType(this, '4BHK')">4 BHK</button>
+                    <button type="button" onclick="selectType(this, 'Villa')">Villa</button>
+                    <button type="button" onclick="selectType(this, 'Plots')">Plots</button>
+                </div>
+
+                <button class="submit-btn" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function selectType(button, value) {
+            document.getElementById("interest_type").value = value;
+
+            // visual active state
+            document.querySelectorAll(".options button").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            button.classList.add("active");
+        }
+    </script>
+
+</body>
+
+</html>

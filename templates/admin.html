@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            background-color: aliceblue;
+        }
+
+        header {
+            padding: 20px;
+            background-color: steelblue;
+            text-align: center;
+            color: white;
+        }
+
+        .wrapper {
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        form {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: forestgreen;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        /* lead options */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .options button {
+            background: #fff;
+            color: steelblue;
+            border: 1px solid steelblue;
+        }
+
+        .options button.active,
+        .options button:hover {
+            background-color: steelblue;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+
+    <div class="wrapper">
+
+        <!-- ADD / UPDATE PROPERTY -->
+        <div class="section">
+            <h2>Add / Update Property</h2>
+            <form method="post" action="/admin/add" enctype="multipart/form-data">
+                <input type="text" name="title" placeholder="Property Title" required>
+                <input type="text" name="location" placeholder="Location" required>
+                <input type="text" name="price" placeholder="Price" required>
+                <textarea name="description" rows="4" placeholder="Property Description"></textarea>
+                <input type="file" name="image" accept="image/*" required>
+                <button type="submit">Save Property</button>
+            </form>
+        </div>
+
+        <!-- DELETE PROPERTY -->
+        <div class="section">
+            <h2>Delete Property</h2>
+            <form method="post" action="/admin/delete">
+                <input type="number" name="property_id" placeholder="Property ID" required>
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <!-- LEADS FORM (EMBEDDED) -->
+        <div class="section">
+            <h2>Add Lead (Manual / Demo)</h2>
+            <form method="post" action="/leads/submit">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="tel" name="mobile" placeholder="Mobile No" required>
+
+                <select name="location" required>
+                    <option value="">Select Location</option>
+                    <option>Bangalore</option>
+                    <option>Hyderabad</option>
+                    <option>Chennai</option>
+                    <option>Pune</option>
+                </select>
+
+                <input type="hidden" name="interest_type" id="interest_type" required>
+
+                <div class="options">
+                    <button type="button" onclick="selectType(this, '2BHK')">2 BHK</button>
+                    <button type="button" onclick="selectType(this, '3BHK')">3 BHK</button>
+                    <button type="button" onclick="selectType(this, '4BHK')">4 BHK</button>
+                    <button type="button" onclick="selectType(this, 'Villa')">Villa</button>
+                    <button type="button" onclick="selectType(this, 'Plots')">Plots</button>
+                </div>
+
+                <button type="submit">Submit Lead</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        function selectType(button, value) {
+            document.getElementById("interest_type").value = value;
+
+            document.querySelectorAll(".options button").forEach(btn => {
+                btn.classList.remove("active");
+            });
+            button.classList.add("active");
+        }
+    </script>
+
+</body>
+
+</html>
